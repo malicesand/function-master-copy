@@ -157,25 +157,35 @@ function isFriend(name, object) {
 // Function 13 - Non-Friends /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
+// Input: name(string) array(of Objects)
+// Output: new array listing the the non friends of <name> from <array>
+// If a name appears in a given friend array, the reverse will be true as well. Therefore, we can check for friend status of input name by iterating through the other object arrays
 function nonFriends(name, array) {
-    var output = [] // non friends of name
-    // return list of names that name is not friends with
+    // create variable to contain our nonFriends list and assign it to empty array
+    var nonFriends = [];
+    // create loop to iterate through the input array to access each object
     for (var i = 0; i < array.length; i++) {
+        // initialize friends variable and assign it to the friends property associated with the Object at the current index
         var friends = array[i].friends
+        // create test variable isFriend and assign it falsey boolean 
         var isFriend = false;
-        // use if statment to check if the current name in the input array is not the same as the i
+        // use if statment to check the name property associated with the Object at current index against the input name String
         if (array[i].name !== name) {
+            // iterate through friends array of current Object if name property does not match name string
             for (var j = 0; j < friends.length; j++ ) {
+                // if the name String is found in the current Object's name array
                 if (friends[j] === name) {
+                    // isFriend reassigned to Truthy
                     isFriend = true;
                 }
-            }
+            } // if isFriend has remained Falsey
             if (!isFriend) {
-                output.push(array[i].name);
+                // add the value from the current Object's name property to the nonFriends array
+                nonFriends.push(array[i].name);
             }
         }
-    }  
-    return output    
+    }  // return nonFriends list
+    return nonFriends    
 }
 
 
